@@ -1,26 +1,69 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * MangoByte brand tokens
+ * leaf   — deep mango-leaf green, the brand's ink and dark surface
+ * mango  — ripe mango yellow, the signature accent
+ * flesh  — mango-flesh coral, used sparingly for emphasis
+ * paper  — warm cream base
+ */
+@theme {
+  --color-leaf: #0e2b24;
+  --color-leaf-soft: #173d33;
+  --color-leaf-line: #2a5246;
+  --color-sprout: #4caf7d;
+  --color-mango: #ffb000;
+  --color-mango-soft: #ffe2a3;
+  --color-flesh: #ff6a3d;
+  --color-paper: #f6f0e4;
+  --color-paper-deep: #ece3d1;
+  --color-ink: #0e2b24;
+  --color-muted: #5b6a62;
+  --color-line: #d9cfbc;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-display: var(--font-bricolage);
+  --font-sans: var(--font-instrument);
+  --font-mono: var(--font-plex-mono);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-marquee: marquee 38s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-mango);
+  color: var(--color-leaf);
+}
+
+/* Subtle pixel-grid texture used on dark "byte" surfaces */
+.pixel-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee {
+    animation: none;
+  }
 }
